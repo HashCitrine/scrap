@@ -1,4 +1,4 @@
-# https
+# HTTPS
 - HyperText Transfer Protocol over Secure Socket Layer
 - HTTP의 보안이 강화된 버전(Secure Socket Layer가 추가된 버전)
 - HTTP의 기본 포트는 80, HTTPS는 443
@@ -19,7 +19,7 @@
 8. 대칭키 복호화 : 사이트 개인키를 이용해 대칭키 획득
 9. 암호화 통신 : 대칭키를 이용해 사이트와 이용자간의 암호화된 통신 진행
 
-## 참조
+## 참고
 - [HTTPS 란 무엇입니까?](https://www.ssl.com/ko/%EC%9E%90%EC%A3%BC-%EB%AC%BB%EB%8A%94-%EC%A7%88%EB%AC%B8/https-%EB%9E%80/)
 - [SSL 통신과정 한 눈에 보기!](https://blog.naver.com/ssl_study/30151160122)
 - [[Network/네트워크] HTTP & HTTPS - 정의, 특징, 흐름](https://velog.io/@yanghl98/Network%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-HTTP-HTTPS)
