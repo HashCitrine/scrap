@@ -1,5 +1,5 @@
 # Spring AI
-![spring-ai](https://images.ctfassets.net/mnrwi97vnhts/4mda205vy509Dx3vGkMwFr/af520e66dc79fb80cd1bc129a11d6d23/spring-ai-integration-diagram-3.svg)
+![spring-ai](https://images.ctfassets.net/mnrwi97vnhts/4mda205vy509Dx3vGkMwFr/af520e66dc79fb80cd1bc129a11d6d23/spring-ai-integration-diagram-3.svg)  
 Spring 기반 프로젝트에서 AI 서비스와 통합하기 위한 여러 방안을 제공하는 프로젝트(패키지)
 
 ## 주요 제공 기능
