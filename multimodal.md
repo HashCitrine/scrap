@@ -1,5 +1,6 @@
 # Multimodal RAG
-- Multimodal : 여러 타입의 데이터를 이해하는 기술
+
+# Multimodal : 여러 타입의 데이터를 이해하는 기술
 - Reasoning : 추론
 - Optimization : 최적화
   1. Math : 수학적
@@ -9,7 +10,6 @@
   1. Embedding : 서로 다른 차원의 데이터를 통합하여 모델이 이용할 수 있도록 변환(Encoding)된 상태로 저장
   2. Vector DB : Embedding 한 데이터를 저장할 수 있는 DB
   3. Simularity Search : 유사도(연관도 거리, 각도 - x, y) 기반 검색
-  
 
 - VLM : Vision-Language Model
 
@@ -27,15 +27,28 @@
 - ChatGPT, gemini 등의 서비스를 통해 직접적으로 설정하여 이용할 수는 없음 (API 형태로 이용하면 가능)
 
 # Mel Spectrum
-- 주파수(hz)에 시간(h)축을 둠
 - Mel Scale
-
+- 주파수(hz)에 시간(h)축을 둠
 
 # Trasnformer
 - Supervised Running : 정답(라벨)을 주고 학습
 - UnsuperVised Running : 정답 값 없이 학습 데이터 안에서 연관성을 스스로 발견하며 학습(연산량이 많아짐) -> Self-Attention
 - Nondeterministic : 비결정론적
 - Context Window : 모델이 입력받을 수 있는 (토큰) 양
+
+# [CLIP](https://openai.com/index/clip/)
+- Connecting Text and Image -> Multimodel의 시작
+- Stable diffusion : text-to-image 확산모델
+
+# Reasoning
+- Chain Of Thougth : 연쇄 사고 -> 텍스트, 비전, 소리 뿐만 아니라 촉감, 맛 등에 대해서도 추론이 가능해짐 
+
+# Action Model
+
+# Vector DB
+- vortex
+- cohere
+- weaviate
 
 # Model
 - [VILA](https://nvlabs.github.io/VILA/)
