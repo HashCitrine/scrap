@@ -26,14 +26,19 @@
 - [Cognito](https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/what-is-amazon-cognito.html)
 - B2C
 
-## SaaS Bussiness (원가 / 마케팅)
+### SaaS Bussiness (원가 / 마케팅)
 - 이탈률 공식(churn Rate), 순증가 고객 공식(Net New Customers), 전체 고객 수 변화 공식(이번달 말 고객수)
 - Net New : 신규 고객
 
-## SaaS 보안
+### SaaS 보안
 - 테넌트(세입자) 격리
 - 인증 및 권한
 
-## Tenant Vs Tier
+### Tenant Vs Tier
 - 다른 테넌트로부터 데이터, 어플리케이션을 안전하게 분리 필요 -> 데이터 유출, 성능 저하 등의 문제 방지를 위함
 - Tier 격리 : 테넌트의 요구사항에 따라 격리 수준 구분 (원하는 형태의 `공유`도 필요)
+
+
+
+## 교육 자료 (Notion)
+- 참조 : https://www.notion.so/23af7bc8c4d480d999acc4e6ad6a1091?v=23ef7bc8c4d480d78ca9000c1ee43dbe
