@@ -43,7 +43,7 @@
 ## 교육 자료 (Notion)
 - 참조 : https://www.notion.so/23af7bc8c4d480d999acc4e6ad6a1091?v=23ef7bc8c4d480d78ca9000c1ee43dbe
 
-### 리눅스와 공유하는 컨테이너 컨셉
+### 기존 리눅스와 공유하는 컨테이너 컨셉 기능
 ◾ **cgroups (control groups)**: 프로세스 그룹에 대한 자원(CPU, 메모리, I/O 등) 할당 및 제한 기능
 
 ◾ **Namespaces** (네임스페이스): 프로세스, 네트워크, 마운트 지점 등 시스템 자원을 격리하는 기능
@@ -55,3 +55,7 @@
 ◾ **seccomp (Secure Computing mode):** 컨테이너가 불필요하거나 잠재적으로 위험할 수 있는 시스템 콜을 사용하지 못하도록 막아 보안 취약점 공격의 가능성을 줄입니다.
 
 ◾ **LSM (Linux Security Module):** SELinux와 같은 강화된 접근 제어 정책을 구현하여 컨테이너에 대한 보안을 더욱 견고하게 만듭니다.
+
+### 레이어 줄이기
+- Dockerfile 구성 시 `RUN` 단위로 이미지 레이어를 구성하며, 이를 줄이기 위해 명령어를 한 줄로 구성하기도 함(`&&` 활용)
+- (예시) [nginx Dockerfile](https://github.com/nginx/docker-nginx/blob/master/stable/debian/Dockerfile)
