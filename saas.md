@@ -63,3 +63,10 @@
 ### 레이어 줄이기
 - Dockerfile 구성 시 `RUN` 단위로 이미지 레이어를 구성하며, 이를 줄이기 위해 명령어를 한 줄로 구성하기도 함(`&&` 활용)
 - (예시) [nginx Dockerfile](https://github.com/nginx/docker-nginx/blob/master/stable/debian/Dockerfile)
+
+
+## docker compose 활용하여 scale out
+```
+docker compose up --scale flask_app=2
+```
+- `--scale` 옵션을 이용해서 compose 에 정의된 서비스(예시의 `flask_app`)를 scale out 할 수 있음
