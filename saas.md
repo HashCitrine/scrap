@@ -81,3 +81,4 @@ docker compose up --scale flask_app=2
 - VPC : 가상 사설 클라우드를 생성하여 AWS 리소스를 격리된 네트워크 환경에서 운영할 수 있게 합니다.
 - CloudWatch : AWS 리소스와 애플리케이션의 모니터링 및 로그 관리를 위한 서비스입니다.
 - **App2Container** : .net, JAVA 어플리케이션에 한해서 컨테이너화 지원 도구(CLI) -> 기존 자바가 돌아가고 있는 서버 환경에 설치하여 컨테이너화 및 CI/CD 파이프라인으로서 이용할 수 있음 (CloudFormation 설정에 따라 ECR -> ECS 이용하여 자동 배포 진행)
+- Amanzon Q : 코드 작업 지원 도구(아마 LLM 기반? Gemini CLI, Claude Code, Cursor 등과 같은 역할)
