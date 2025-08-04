@@ -133,3 +133,8 @@ docker compose up --scale flask_app=2
 ## 보안 부분
 - [공동 책임 모델](https://aws.amazon.com/ko/compliance/shared-responsibility-model/)
 - task role, task execution role
+
+
+### 인프라 리소스 테스트 도구
+1. [hey](https://github.com/rakyll/hey) : 트래픽 부하
+2. [stress](https://github.com/resurrecting-open-source-projects/stress) : CPU, Memory, Disk 리소스 부하
