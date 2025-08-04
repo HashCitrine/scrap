@@ -119,7 +119,7 @@ aws ecs create-service \
 5. 재반영 : `aws ecs wait services-stable`
 - (예시) `aws ecs wait services-stable --cluster retail-store-ecs-cluster --services ui`
 
-## 컨테이너 접속(/bin/bash) 예시
+#### 컨테이너 접속(/bin/bash) 예시
 ```
 ECS_EXEC_TASK_ARN=$(aws ecs list-tasks --cluster retail-store-ecs-cluster \
     --service-name assets --query 'taskArns[]' --output text | \
@@ -136,13 +136,13 @@ aws ecs execute-command --cluster retail-store-ecs-cluster \
 fi
 ```
 
-### Auto Scailing Policies
+#### Auto Scailing Policies
 - Traget Tracking : cpu 사용률 등을 기반으로 auto Scailing
 - Step Scaling : 자원 사용률 이용 위반(임계값) 비율에 따라 auto Scailing
 - alb drain : 배포 과정 중 트레픽을 일정 시간 유지하도록 하는 옵션
 - 가용성 <-> 배포 속도 (availability <-> speed) 사이에서 밸런스를 잡아야 함
 
-### Cluster Scailing
+#### Cluster Scailing
 - 컨테이너 단위가 아닌 cluster 단위로 스케일링 진행
 - `CapacityProviderReservation` 을 추적하여 동작 -> 필요한 인스턴스와 현재 실행 중인 인스턴스를 계산하며 동작
 
@@ -163,6 +163,10 @@ fi
 
 ### Service Connect
 - 다양한 서비스들의 연계된 메트릭을 제공
+
+## Fargate Spot
+- 다른 사용자가 사용하고 있는 Fargate의 여유분을 spot성으로 사용할 수 있음(일반 Fargate보다 싼 가격)
+- Spot의 수요(이용량)이 많아져서 요금이 높아지면 다시 인스턴스가 회수됨(해당 특성을 알고 사용해야 함)
 
 ## Build & Deploy 도구
 - jenkins, spinnaker 등
