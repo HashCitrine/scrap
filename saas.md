@@ -167,6 +167,7 @@ fi
 ## Fargate Spot
 - 다른 사용자가 사용하고 있는 Fargate의 여유분을 spot성으로 사용할 수 있음(일반 Fargate보다 싼 가격)
 - Spot의 수요(이용량)이 많아져서 요금이 높아지면 다시 인스턴스가 회수됨(해당 특성을 알고 사용해야 함)
+- 종료 예정 시 알림이 발생하며 2분간의 유예가 주어짐(참조 : https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html#fargate-capacity-providers-termination)
 
 ## Build & Deploy 도구
 - jenkins, spinnaker 등
