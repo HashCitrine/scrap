@@ -95,8 +95,26 @@ docker compose up --scale flask_app=2
 - 빈팩(`(bin packing problem`) 전략, 메모리 가용 영역에 따른 배포 등을 설정하여 `비용 최적화` auto scaling 가능 -> `ECS Task Rebalancing`
 - Fargate : EC2와 달리 서버리스 서비스 -> 위 기반에서 ECS 이용 가능 (비용 절약)
 
+### Auto Scailing Policies
+- Traget Tracking : cpu 사용률 등을 기반으로 auto Scailing
+- Step Scaling : 자원 사용률 이용 위반(임계값) 비율에 따라 auto Scailing
+- alb drain : 배포 과정 중 트레픽을 일정 시간 유지하도록 하는 옵션
+- 가용성 <-> 배포 속도 (availability <-> speed) 사이에서 밸런스를 잡아야 함
+
+### Cluster Scailing
+- 컨테이너 단위가 아닌 cluster 단위로 스케일링 진행
+- `CapacityProviderReservation` 을 추적하여 동작 -> 필요한 인스턴스와 현재 실행 중인 인스턴스를 계산하며 동작
+
 ### Cloud Watch 
 - 서비스들의 log 관리 (`Prometheus` 등과 같은 역할)
+- 각 서비스에서 `awslogs` 드라이버를 이용해 cloudwatch로 로그 전달 가능
+- awsfirelens 드라이버 활용해 fluentD 등과 연계 가능
+- 관리 시 Managed Grafana, Prometheus 등의 서비스와 함께 사용
+- `container insights` : metrics 시각화 도구(자원 사용량 전반에 대한 기본 대시보드 제공)
+
+### Observability
+- 관측 능력
+- log(타임스탬프 기록), metrics(시계열 수치), traces(전체 흐름의 분산 이벤트 기록 - 가시화)
 
 ### Service Discovery
 - 추가적인 인프라 발생
@@ -104,3 +122,10 @@ docker compose up --scale flask_app=2
 
 ### Service Connect
 - 다양한 서비스들의 연계된 메트릭을 제공
+
+## Build & Deploy 도구
+- jenkins, spinnaker 등
+
+## 배포 전략
+- rolling : 점진적인 배포, 배포 과정 중 유지할 인스턴스 수 등에 대해 설정 필요
+- blue & green : 새로운 버전의 배포가 완료되면, 구 버전의 인스턴스(컨테이너, task)로 트레픽만 전환(로드밸런서 활용)
