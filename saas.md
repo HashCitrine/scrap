@@ -119,6 +119,23 @@ aws ecs create-service \
 5. 재반영 : `aws ecs wait services-stable`
 - (예시) `aws ecs wait services-stable --cluster retail-store-ecs-cluster --services ui`
 
+## 컨테이너 접속(/bin/bash) 예시
+```
+ECS_EXEC_TASK_ARN=$(aws ecs list-tasks --cluster retail-store-ecs-cluster \
+    --service-name assets --query 'taskArns[]' --output text | \
+    xargs -n1 aws ecs describe-tasks --cluster retail-store-ecs-cluster --tasks | \
+    jq -r '.tasks[] | select(.enableExecuteCommand == true) | .taskArn' | \
+    head -n 1)
+
+if [ -z ${ECS_EXEC_TASK_ARN} ]; then echo "ECS_EXEC_TASK_ARN is not correctly configured!"; else
+aws ecs execute-command --cluster retail-store-ecs-cluster \
+    --task $ECS_EXEC_TASK_ARN \
+    --container application \
+    --interactive \
+    --command "/bin/bash"
+fi
+```
+
 ### Auto Scailing Policies
 - Traget Tracking : cpu 사용률 등을 기반으로 auto Scailing
 - Step Scaling : 자원 사용률 이용 위반(임계값) 비율에 따라 auto Scailing
