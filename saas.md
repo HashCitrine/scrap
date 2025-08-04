@@ -87,7 +87,7 @@ docker compose up --scale flask_app=2
 
 
 
-## AWS 서비스 정리
+## ECS 관련 AWS 서비스 정리
 ### ECS cluster
 - 각 노드 서버에 Agent를 두고 instance를 관리함
 - ECS Task : ECS Cluster에서의 최소 실행 단위(K8S의 Pod와 같은 단위인 듯?) -> `Task Definition` 으로 배포 설정 진행
@@ -129,3 +129,7 @@ docker compose up --scale flask_app=2
 ## 배포 전략
 - rolling : 점진적인 배포, 배포 과정 중 유지할 인스턴스 수 등에 대해 설정 필요
 - blue & green : 새로운 버전의 배포가 완료되면, 구 버전의 인스턴스(컨테이너, task)로 트레픽만 전환(로드밸런서 활용)
+
+## 보안 부분
+- [공동 책임 모델](https://aws.amazon.com/ko/compliance/shared-responsibility-model/)
+- task role, task execution role
