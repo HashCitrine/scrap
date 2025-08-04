@@ -94,6 +94,25 @@ docker compose up --scale flask_app=2
 - 하나의 task 당 10개의 컨테이너까지 이용 가능
 - 빈팩(`(bin packing problem`) 전략, 메모리 가용 영역에 따른 배포 등을 설정하여 `비용 최적화` auto scaling 가능 -> `ECS Task Rebalancing`
 - Fargate : EC2와 달리 서버리스 서비스 -> 위 기반에서 ECS 이용 가능 (비용 절약)
+#### 배포 과정
+1. task definition 업데이트 (`.json`)
+2. task definition 적용 : `aws ecs register-task-definition --cli-input-json file://${FILE_NAME}.json`
+   - 적용 내용 조회 : `aws ecs describe-task-definition --task-definition ${DEFINITION_NAME}`
+3. task definition 기반으로 배포 : `aws ecs create-service`
+- (예시)
+```
+export UI_TARGET_GROUP_ARN=$(aws elbv2 describe-target-groups --names ui-application \
+ --query 'TargetGroups[0].TargetGroupArn' --output text)
+
+aws ecs create-service \
+ --cluster retail-store-ecs-cluster \
+ --service-name ui \
+ --task-definition retail-store-ecs-ui \
+ --desired-count 2 \
+ --launch-type FARGATE \
+ --load-balancers targetGroupArn=${UI_TARGET_GROUP_ARN},containerName=application,containerPort=8080 \
+ --network-configuration "awsvpcConfiguration={subnets=[${PRIVATE_SUBNET1},${PRIVATE_SUBNET2}],securityGroups=[${UI_SG_ID}],assignPublicIp=DISABLED}" 
+```
 
 ### Auto Scailing Policies
 - Traget Tracking : cpu 사용률 등을 기반으로 auto Scailing
@@ -138,3 +157,7 @@ docker compose up --scale flask_app=2
 ### 인프라 리소스 테스트 도구
 1. [hey](https://github.com/rakyll/hey) : 트래픽 부하
 2. [stress](https://github.com/resurrecting-open-source-projects/stress) : CPU, Memory, Disk 리소스 부하
+
+
+## 배포 자동화(CI/CD)
+- Task Definition 관리 방안 필요(매번 새롭게 적용해야 하므로, 별도로 파일을 관리하거나 CI/CD 파이프라인에 녹여서 관리하는 등의 방안 필요)
