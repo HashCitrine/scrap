@@ -84,3 +84,16 @@ docker compose up --scale flask_app=2
 - **ECS** : 컨테이너화된 애플리케이션을 쉽게 배포하고 관리할 수 있는 서비스입니다. -> EC2와 같은 별도 서버가 아닌, 컨테이너 단위로 서비스 배포하여 이용 가능
 - **App2Container** : .net, JAVA 어플리케이션에 한해서 컨테이너화 지원 도구(CLI) -> 기존 자바가 돌아가고 있는 서버 환경에 설치하여 컨테이너화 및 CI/CD 파이프라인으로서 이용할 수 있음 (CloudFormation 설정에 따라 ECR -> ECS 이용하여 자동 배포 진행)
 - **Amanzon Q** : 코드 작업 지원 도구(아마 LLM 기반? Gemini CLI, Claude Code, Cursor 등과 같은 역할)
+
+
+
+## AWS ECS cluster
+- 각 노드 서버에 Agent를 두고 instance를 관리함
+- ECS Task : ECS Cluster에서의 최소 실행 단위(K8S의 Pod와 같은 단위인 듯?) -> `Task Definition` 으로 배포 설정 진행
+- 하나의 task 당 10개의 컨테이너까지 이용 가능
+- 빈팩(`(bin packing problem`) 전략, 메모리 가용 영역에 따른 배포 등을 설정하여 `비용 최적화` auto scaling 가능 -> `ECS Task Rebalancing`
+- Fargate : EC2와 달리 서버리스 서비스 -> 위 기반에서 ECS 이용 가능 (비용 절약)
+
+### AWS Cloud Watch 
+- 서비스들의 log 관리 (`Prometheus` 등과 같은 역할)
+- 
