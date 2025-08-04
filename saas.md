@@ -87,13 +87,20 @@ docker compose up --scale flask_app=2
 
 
 
-## AWS ECS cluster
+## AWS 서비스 정리
+### ECS cluster
 - 각 노드 서버에 Agent를 두고 instance를 관리함
 - ECS Task : ECS Cluster에서의 최소 실행 단위(K8S의 Pod와 같은 단위인 듯?) -> `Task Definition` 으로 배포 설정 진행
 - 하나의 task 당 10개의 컨테이너까지 이용 가능
 - 빈팩(`(bin packing problem`) 전략, 메모리 가용 영역에 따른 배포 등을 설정하여 `비용 최적화` auto scaling 가능 -> `ECS Task Rebalancing`
 - Fargate : EC2와 달리 서버리스 서비스 -> 위 기반에서 ECS 이용 가능 (비용 절약)
 
-### AWS Cloud Watch 
+### Cloud Watch 
 - 서비스들의 log 관리 (`Prometheus` 등과 같은 역할)
-- 
+
+### Service Discovery
+- 추가적인 인프라 발생
+- DNS 기반으로 기본적인 디스커버리만 제공 -> 메트릭 제공이 다소 협소해짐
+
+### Service Connect
+- 다양한 서비스들의 연계된 메트릭을 제공
