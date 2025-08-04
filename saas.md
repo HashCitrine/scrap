@@ -95,7 +95,7 @@ docker compose up --scale flask_app=2
 - 빈팩(`(bin packing problem`) 전략, 메모리 가용 영역에 따른 배포 등을 설정하여 `비용 최적화` auto scaling 가능 -> `ECS Task Rebalancing`
 - Fargate : EC2와 달리 서버리스 서비스 -> 위 기반에서 ECS 이용 가능 (비용 절약)
 #### 배포 과정
-1. task definition 업데이트 (`.json`)
+1. task definition 작성 (`.json`)
 2. task definition 적용 : `aws ecs register-task-definition --cli-input-json file://${FILE_NAME}.json`
    - 적용 내용 조회 : `aws ecs describe-task-definition --task-definition ${DEFINITION_NAME}`
 3. task definition 기반으로 배포 : `aws ecs create-service`
@@ -113,6 +113,11 @@ aws ecs create-service \
  --load-balancers targetGroupArn=${UI_TARGET_GROUP_ARN},containerName=application,containerPort=8080 \
  --network-configuration "awsvpcConfiguration={subnets=[${PRIVATE_SUBNET1},${PRIVATE_SUBNET2}],securityGroups=[${UI_SG_ID}],assignPublicIp=DISABLED}" 
 ```
+
+4. task definition 재적용 시 : `aws ecs update-service`
+- (예시) `aws ecs update-service --cluster retail-store-ecs-cluster --service ui --task-definition retail-store-ecs-ui`
+5. 재반영 : `aws ecs wait services-stable`
+- (예시) `aws ecs wait services-stable --cluster retail-store-ecs-cluster --services ui`
 
 ### Auto Scailing Policies
 - Traget Tracking : cpu 사용률 등을 기반으로 auto Scailing
