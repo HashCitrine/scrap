@@ -230,7 +230,7 @@ fi
 - 서버리스 SaaS 솔루션 이용 : 레거시 지원 단계적 중단, 소규모 고객 유치, 서드 파티 통합 과제 등에 이점 제공
 
 ### SBT (SaaS Builder Toolkit)
-- CDK 기반으로 SaaS 구성에 도움을 주는 솔루션 제품
+- CDK 기반으로 SaaS 구성에 도움을 주는 오픈 소스 도구 -> 최종적으로는 `CloudFormation` 템플릿 생성을 도와주는 도구로서의 기능 
 - CDK : python 등과 같은 코드 기반으로 인프라 구성요소 설정 및 연계
   - 참조 : https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
   - (+) : https://github.com/aws-samples/aws-cdk-examples/tree/main
@@ -238,6 +238,10 @@ fi
 - SBT MCP 서버를 이용해 SBT 이용에 도움을 받을 수 있음
 - SaaS 를 이용해 `마켓플레이스` 등록하여 매출을 발생시킬 수 있음
 - 참조 : https://github.com/awslabs/sbt-aws
+
+#### SBT Demo
+- notion : https://www.notion.so/SBT-23ff7bc8c4d48086a96de2603e70c47f
+
 
 ## SaaS 기본 아키텍처
 0. 서비스 접근 시 cognito 등으로 인증 제어
