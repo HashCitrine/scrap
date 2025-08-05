@@ -235,6 +235,8 @@ fi
   - 참조 : https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
   - (+) : https://github.com/aws-samples/aws-cdk-examples/tree/main
 - SaaS 구성요소가 interface로 되어 있음 (구성요소별로 원하는 도구을 붙혀서 이용할 수 있음) : Auth, Metering, Point Solutions, Biiling
+- SBT MCP 서버를 이용해 SBT 이용에 도움을 받을 수 있음
+- SaaS 를 이용해 `마켓플레이스` 등록하여 매출을 발생시킬 수 있음
 - 참조 : https://github.com/awslabs/sbt-aws
 
 ## SaaS 기본 아키텍처
