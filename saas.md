@@ -245,13 +245,14 @@ fi
 
 ## SaaS 기본 아키텍처
 0. 서비스 접근 시 cognito 등으로 인증 제어
-1. Control Plane : 관리 영역, 대시보드, 보고서 등
+1. Control Plane : 관리 영역, 대시보드, 보고서 등 ( + Admin Console - 테넌트 등록 및 관리)
 2. Core App Plane : ci/cd 등 (Event Bridge로 control plane과 연결 / 해당 영역 제품 : AWS Step Functions, Code build)
 3. Application Plane : service, tenant namespace
 
 ## ETC
 ### 온프레미스 대응 툴
 - Lamda : OpenFaaS, Knative, Apache OpenWhisk, Fission
+- CloudFront(CDN, 정적 소스 관리)
 - S3 : minio
 - Gateway : nginx, traefik, caddy
 - Route53(DNS) : 
