@@ -196,6 +196,37 @@ fi
 - 코드 단위로 업로드하여 실행
 
 
-### 테넌트
+### Tenant(테넌트)
 - 서비스 임차인(클라우드 서비스 이용자)
 - 기존에는 테넌트마다 1:1로 서버 제공 -> 소규모 테넌트에 대응하기 위해 Serverless, SaaS 등의 제품 제공
+
+### Integration
+- 서비스 통합 방안
+
+#### 1. 동기식
+- 순차적으로 요청 처리 서비스에 요청 전달
+
+#### 2. 비동기식
+- 처리 요청을 SQS 등을 통해 Queue 기반으로 해당 처리 서비스에 요청 전달
+
+#### 3. 이벤트 기반
+- 요청 처리를 위한 이벤트 구독하여 동작(`Event Bridge`) 
+
+## SaaS Migration
+- 기존기능 보장(투명한 마이그레이션 제공) 필요
+- 서버리스 SaaS 솔루션 이용 : 레거시 지원 단계적 중단, 소규모 고객 유치, 서드 파티 통합 과제 등에 이점 제공
+
+## ETC
+### 온프레미스 대응 툴
+- Lamda : OpenFaaS, Knative, Apache OpenWhisk, Fission
+- S3 : minio
+- Gateway : nginx, traefik, caddy
+- Route53(DNS) : 
+- Cognito(Auth) : keycloak
+- ECS : kubernates (with KEDA, Knative) , docker swarm
+- ECR : horbor
+- DynamoDB : MongoDB
+- CloudFormation : TerraForm
+- Cloud Watch : Prometheous
+- Event Bridge, SQS : Kafka, ActiveMQ, AlarmsOne, AlertNow, Zenius SMS
+- Code pipeline : jenkins, spinnaker
