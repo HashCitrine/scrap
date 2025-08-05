@@ -1,7 +1,7 @@
 # SaaS 교육
 (2025.08.01 ~ 05) 메가존클라우드, AWS와 함께하는 SaaS Readiness Program 진행 내용 메모
 
-## SaaS 전환의 필요성
+## Day1. SaaS 전환의 필요성
 ### 개요
 - Software as a Service
 - 서비스형 소프트웨어
@@ -87,7 +87,7 @@ docker compose up --scale flask_app=2
 
 
 
-## ECS 관련 AWS 서비스 정리
+## Day2. ECS 관련 AWS 서비스 정리
 ### ECS cluster
 - 각 노드 서버에 Agent를 두고 instance를 관리함
 - ECS Task : ECS Cluster에서의 최소 실행 단위(K8S의 Pod와 같은 단위인 듯?) -> `Task Definition` 으로 배포 설정 진행
@@ -188,3 +188,14 @@ fi
 
 ## 배포 자동화(CI/CD)
 - Task Definition 관리 방안 필요(매번 새롭게 적용해야 하므로, 별도로 파일을 관리하거나 CI/CD 파이프라인에 녹여서 관리하는 등의 방안 필요)
+
+## Day3. SaaS 전환
+### AWS Lamda
+- EC2와 달리 서버리스 컴퓨팅 서버리스
+- 인프라 관리 포인트(오버헤드)를 최소화
+- 코드 단위로 업로드하여 실행
+
+
+### 테넌트
+- 서비스 임차인(클라우드 서비스 이용자)
+- 기존에는 테넌트마다 1:1로 서버 제공 -> 소규모 테넌트에 대응하기 위해 Serverless, SaaS 등의 제품 제공
