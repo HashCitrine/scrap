@@ -2,6 +2,9 @@
 (2025.08.01 ~ 05) 메가존클라우드, AWS와 함께하는 SaaS Readiness Program 진행 내용 메모
 
 ## Day1. SaaS 전환의 필요성
+- workshop : https://catalog.us-east-1.prod.workshops.aws/workshops/ed1a8610-c721-43be-b8e7-0f300f74684e/en-US
+- (or : https://workshops.aws/card/containers%20immersion%20day)
+
 ### 개요
 - Software as a Service
 - 서비스형 소프트웨어
@@ -88,7 +91,8 @@ docker compose up --scale flask_app=2
 
 
 ## Day2. ECS 관련 AWS 서비스 정리
-- workshop : https://catalog.us-east-1.prod.workshops.aws/event/dashboard/ko-KR/workshop
+- workshop : https://catalog.us-east-1.prod.workshops.aws/event/dashboard/ko-KR/workshop 
+- (or : https://catalog.workshops.aws/ecs-immersion-day/en-US)
 
 ### ECS cluster
 - 각 노드 서버에 Agent를 두고 instance를 관리함
