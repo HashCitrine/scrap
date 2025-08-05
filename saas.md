@@ -88,6 +88,8 @@ docker compose up --scale flask_app=2
 
 
 ## Day2. ECS 관련 AWS 서비스 정리
+- workshop : https://catalog.us-east-1.prod.workshops.aws/event/dashboard/ko-KR/workshop
+
 ### ECS cluster
 - 각 노드 서버에 Agent를 두고 instance를 관리함
 - ECS Task : ECS Cluster에서의 최소 실행 단위(K8S의 Pod와 같은 단위인 듯?) -> `Task Definition` 으로 배포 설정 진행
@@ -190,6 +192,8 @@ fi
 - Task Definition 관리 방안 필요(매번 새롭게 적용해야 하므로, 별도로 파일을 관리하거나 CI/CD 파이프라인에 녹여서 관리하는 등의 방안 필요)
 
 ## Day3. SaaS 전환
+- workshop : https://workshops.aws/card/AWS%20Serverless%20SaaS%20Workshop
+
 ### AWS Lamda
 - EC2와 달리 서버리스 컴퓨팅 서버리스
 - 인프라 관리 포인트(오버헤드)를 최소화
