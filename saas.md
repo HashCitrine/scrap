@@ -41,7 +41,11 @@
 ### Tenant Vs Tier
 - 다른 테넌트로부터 데이터, 어플리케이션을 안전하게 분리 필요 -> 데이터 유출, 성능 저하 등의 문제 방지를 위함
 - Tier 격리 : 테넌트의 요구사항에 따라 격리 수준 구분 (원하는 형태의 `공유`도 필요)
-- RLS(Row Level Security) 정책 : postgres 등의 DB에서 제공하는 격리 정책을 활용하는 방법도 잇음(`어플리케이션 수준`에서의 격리, `ALTER TABLE ${table_name} ENABLE ROW LEVEL SECURITY;`)
+
+### 어플리케이션 수준에서 격리 방안
+- RLS(Row Level Security) 정책 : postgres 등의 DB에서 제공하는 격리 정책을 활용하는 방법도 잇음(`ALTER TABLE ${table_name} ENABLE ROW LEVEL SECURITY;`)
+- DynamoDB는 `dynamodb:LeadingKeys` 등의 옵션을 통해 AWS의 테넨트 설정을 그대로 이용할 수 있음
+- Kubernetes RBAC과 AWS ALB Role을 연계하여 적용하는 방법을 쓸 수 있음 (`신뢰 관계` 설정)
 
 ## 교육 자료 (Notion)
 - 참조 : https://www.notion.so/23af7bc8c4d480d999acc4e6ad6a1091?v=23ef7bc8c4d480d78ca9000c1ee43dbe
@@ -76,7 +80,7 @@ docker compose up --scale flask_app=2
 
 ## AWS Service
 - Cloud9 : 클라우드 기반의 웹 브라우저 통합 개발 환경으로 코드 작성 및 디버깅을 지원합니다.
-- CloudFormation : AWS 리소스를 코드로 정의하고 관리할 수 있는 인프라 자동화 도구입니다.
+- CloudFormation : AWS 리소스를 코드로 정의하고 관리할 수 있는 인프라 자동화 도구입니다. -> `Provisioning`
 - ECR : Docker 이미지와 같은 컨테이너 이미지를 저장하고 관리하는 서비스입니다.
 - EC2 : 가상 서버를 제공하여 사용자가 필요에 따라 컴퓨팅 용량을 조정할 수 있게 합니다.
 - S3 : 객체 스토리지 서비스로, 대용량 데이터를 안전하게 저장하고 관리할 수 있습니다.
@@ -225,6 +229,20 @@ fi
 - 기존기능 보장(투명한 마이그레이션 제공) 필요
 - 서버리스 SaaS 솔루션 이용 : 레거시 지원 단계적 중단, 소규모 고객 유치, 서드 파티 통합 과제 등에 이점 제공
 
+### SBT (SaaS Builder Toolkit)
+- CDK 기반으로 SaaS 구성에 도움을 주는 솔루션 제품
+- CDK : python 등과 같은 코드 기반으로 인프라 구성요소 설정 및 연계
+  - 참조 : https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/en-US
+  - (+) : https://github.com/aws-samples/aws-cdk-examples/tree/main
+- SaaS 구성요소가 interface로 되어 있음 (구성요소별로 원하는 도구을 붙혀서 이용할 수 있음) : Auth, Metering, Point Solutions, Biiling
+- 참조 : https://github.com/awslabs/sbt-aws
+
+## SaaS 기본 아키텍처
+0. 서비스 접근 시 cognito 등으로 인증 제어
+1. Control Plane : 관리 영역, 대시보드, 보고서 등
+2. Core App Plane : ci/cd 등 (Event Bridge로 control plane과 연결 / 해당 영역 제품 : AWS Step Functions, Code build)
+3. Application Plane : service, tenant namespace
+
 ## ETC
 ### 온프레미스 대응 툴
 - Lamda : OpenFaaS, Knative, Apache OpenWhisk, Fission
@@ -232,7 +250,7 @@ fi
 - Gateway : nginx, traefik, caddy
 - Route53(DNS) : 
 - Cognito(Auth) : keycloak
-- ECS, EKS : kubernates (with KEDA, Knative) , docker swarm
+- ECS, EKS : docker swarm, kubernates (with KEDA, Knative)
 - ECR : horbor
 - DynamoDB : MongoDB
 - CloudFormation, CDK : TerraForm
