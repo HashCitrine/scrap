@@ -210,7 +210,7 @@ fi
 - 처리 요청을 SQS 등을 통해 Queue 기반으로 해당 처리 서비스에 요청 전달
 
 #### 3. 이벤트 기반
-- 요청 처리를 위한 이벤트 구독하여 동작(`Event Bridge`) 
+- 요청 처리를 위한 서비스에서 해당 동작의 트리거가 되는 이벤트 구독하여 동작(`Event Bridge`) 
 
 ## SaaS Migration
 - 기존기능 보장(투명한 마이그레이션 제공) 필요
@@ -226,7 +226,7 @@ fi
 - ECS : kubernates (with KEDA, Knative) , docker swarm
 - ECR : horbor
 - DynamoDB : MongoDB
-- CloudFormation : TerraForm
+- CloudFormation, CDK : TerraForm
 - Cloud Watch : Prometheous
 - Event Bridge, SQS : Kafka, ActiveMQ, AlarmsOne, AlertNow, Zenius SMS
 - Code pipeline : jenkins, spinnaker
