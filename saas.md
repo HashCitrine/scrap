@@ -46,6 +46,7 @@
 - RLS(Row Level Security) 정책 : postgres 등의 DB에서 제공하는 격리 정책을 활용하는 방법도 잇음(`ALTER TABLE ${table_name} ENABLE ROW LEVEL SECURITY;`)
 - DynamoDB는 `dynamodb:LeadingKeys` 등의 옵션을 통해 AWS의 테넨트 설정을 그대로 이용할 수 있음
 - Kubernetes RBAC과 AWS ALB Role을 연계하여 적용하는 방법을 쓸 수 있음 (`신뢰 관계` 설정)
+- [Kubernetes Quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 등을 이용해 리소스 모니터링 가능
 
 ## 교육 자료 (Notion)
 - 참조 : https://www.notion.so/23af7bc8c4d480d999acc4e6ad6a1091?v=23ef7bc8c4d480d78ca9000c1ee43dbe
@@ -211,7 +212,7 @@ fi
 ### Tenant(테넌트)
 - 서비스 임차인(클라우드 서비스 이용자)
 - 기존에는 테넌트마다 1:1로 서버 제공 -> 소규모 테넌트에 대응하기 위해 Serverless, SaaS 등의 제품 제공
-- 테넌트 기준으로 logging, metric, trace를 수집하고 이를 기반으로 mettering 하여, 각 테넌트별 사용량에 따라 알맞는 `비용 청구`(비용 보고서, billing) 가능 
+- 테넌트 기준으로 logging, metric, trace를 수집하고 이를 기반으로 mettering 하여, 각 테넌트별 사용량에 따라 알맞는 `비용 청구`(비용 보고서, `) 가능 
 
 ### Integration
 - 서비스 통합 방안
@@ -248,6 +249,13 @@ fi
 1. Control Plane : 관리 영역, 대시보드, 보고서 등 ( + Admin Console - 테넌트 등록 및 관리)
 2. Core App Plane : ci/cd 등 (Event Bridge로 control plane과 연결 / 해당 영역 제품 : AWS Step Functions, Code build)
 3. Application Plane : service, tenant namespace
+
+
+### 아키텍처 개발 구성원
+1. 비즈니스 관리자 : 테넌트, 티어, 서비스 구성 등 SaaS 전반 아키텍처 구성
+2. 엔지니어 : 비즈니스 구현
+- 필요 시 컨설팅 진행
+
 
 ## ETC
 ### 온프레미스 대응 툴
