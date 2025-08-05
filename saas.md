@@ -41,7 +41,7 @@
 ### Tenant Vs Tier
 - 다른 테넌트로부터 데이터, 어플리케이션을 안전하게 분리 필요 -> 데이터 유출, 성능 저하 등의 문제 방지를 위함
 - Tier 격리 : 테넌트의 요구사항에 따라 격리 수준 구분 (원하는 형태의 `공유`도 필요)
-
+- RLS(Row Level Security) 정책 : postgres 등의 DB에서 제공하는 격리 정책을 활용하는 방법도 잇음(`어플리케이션 수준`에서의 격리, `ALTER TABLE ${table_name} ENABLE ROW LEVEL SECURITY;`)
 
 ## 교육 자료 (Notion)
 - 참조 : https://www.notion.so/23af7bc8c4d480d999acc4e6ad6a1091?v=23ef7bc8c4d480d78ca9000c1ee43dbe
@@ -207,7 +207,7 @@ fi
 ### Tenant(테넌트)
 - 서비스 임차인(클라우드 서비스 이용자)
 - 기존에는 테넌트마다 1:1로 서버 제공 -> 소규모 테넌트에 대응하기 위해 Serverless, SaaS 등의 제품 제공
-- 테넌트 기준으로 logging, metric, trace를 수집하고 이를 기반으로 mettering 하여, 각 테넌트별 사용량에 따라 알맞는 `비용 청구`(비용 보고서) 가능 
+- 테넌트 기준으로 logging, metric, trace를 수집하고 이를 기반으로 mettering 하여, 각 테넌트별 사용량에 따라 알맞는 `비용 청구`(비용 보고서, billing) 가능 
 
 ### Integration
 - 서비스 통합 방안
@@ -232,7 +232,7 @@ fi
 - Gateway : nginx, traefik, caddy
 - Route53(DNS) : 
 - Cognito(Auth) : keycloak
-- ECS : kubernates (with KEDA, Knative) , docker swarm
+- ECS, EKS : kubernates (with KEDA, Knative) , docker swarm
 - ECR : horbor
 - DynamoDB : MongoDB
 - CloudFormation, CDK : TerraForm
