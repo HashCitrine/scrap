@@ -14,3 +14,4 @@
 ## 참조
 1. Mixtral 모델 : https://huggingface.co/mistralai/Mixtral-8x7B-v0.1
 2. Switch Transformer : https://arxiv.org/abs/2101.03961
+3. MoE Example : https://github.com/davidmrau/mixture-of-experts
