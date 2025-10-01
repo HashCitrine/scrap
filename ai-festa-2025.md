@@ -31,6 +31,7 @@
 
 ## 포티투마루
 - llm42 : https://42dot.ai/openDataset/nlp/overview
+- rag42 : https://platum.kr/archives/265258
 - hugginface : https://huggingface.co/42dot
 
 ## 세라젬
