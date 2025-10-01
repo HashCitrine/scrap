@@ -18,3 +18,19 @@
 
 ### ETC
 - 라이너(LLM) : https://liner.com/ko
+
+
+## Day 2
+## 더존비즈온
+- WEHAGO : https://www.douzone.com/product/wehago.jsp
+- ONE AI : https://www.douzone.com/product/oneai.jsp
+- CUBE AI : https://www.etnews.com/20250917000259
+
+## Posco DX
+- Pysical AI : https://www.poscodx.com/kor/pr/newsRoomView.do?col=&sw=&page=&num=7064
+
+## 포티투마루
+- llm42 : https://42dot.ai/openDataset/nlp/overview
+- hugginface : https://huggingface.co/42dot
+
+## 세라젬
