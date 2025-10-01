@@ -34,8 +34,11 @@
 - rag42 : https://platum.kr/archives/265258
 - hugginface : https://huggingface.co/42dot
 
-### 세라젬, 아모레퍼시픽
+### 삼성 SDS
+- Brity Copilot : https://www.samsungsds.com/kr/why-sds-ai/why-sds-ai.html
 
+### 노히어
+- Attention Is All You Need : https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
 
 # 참고 자료
 - Vertical AI : https://brunch.co.kr/@donghyungshin/202
