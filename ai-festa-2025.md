@@ -21,17 +21,21 @@
 
 
 ## Day 2
-## 더존비즈온
+### 더존비즈온
 - WEHAGO : https://www.douzone.com/product/wehago.jsp
 - ONE AI : https://www.douzone.com/product/oneai.jsp
 - CUBE AI : https://www.etnews.com/20250917000259
 
-## Posco DX
+### Posco DX
 - Pysical AI : https://www.poscodx.com/kor/pr/newsRoomView.do?col=&sw=&page=&num=7064
 
-## 포티투마루
+### 포티투마루
 - llm42 : https://42dot.ai/openDataset/nlp/overview
 - rag42 : https://platum.kr/archives/265258
 - hugginface : https://huggingface.co/42dot
 
-## 세라젬
+### 세라젬, 아모레퍼시픽
+
+
+# 참고 자료
+- Vertical AI : https://brunch.co.kr/@donghyungshin/202
