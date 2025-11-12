@@ -3,7 +3,7 @@
 # Multimodal : 여러 타입의 데이터를 이해하는 기술
 - Reasoning : 추론
 - Optimization : 최적화
-  1. Math : 수학적
+  1. Math: 수학적
   2. Rationale : 인지적
 
 - RAG(Retrieval Augmented Generation)
