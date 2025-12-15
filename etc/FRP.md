@@ -18,8 +18,6 @@
         - TZ=Asia/Seoul
       networks:
         - frp_shared_nw
-      depends_on:
-        - api
       healthcheck:
         test: [ "CMD", "pidof", "frpc" ]
         interval: 30s
