@@ -9,6 +9,13 @@ Qwen3.8-Flash-Next는 Alibaba Qwen 팀이 차세대 Qwen 아키텍처를 미리 
 - **N-gram 임베딩**은 인접한 토큰 조합의 표현을 테이블에서 조회한다. 조회할 행을 미리 알 수 있어 테이블을 호스트 RAM에 두고 필요한 부분을 비동기로 가져올 수 있다. **Gated Residual**은 잔차 경로를 네 갈래로 확장하고 입력에 따라 각 경로에서 읽고 쓸 정보를 조절한다. [기술 보고서](https://arxiv.org/abs/2608.30320)
 - 공개 가중치 **Qwen3.8-Flash-Next**의 기본 컨텍스트는 262,144토큰이며 최대 100만 토큰까지 확장할 수 있다. 관리형 API **Qwen3.8-Flash**는 기본 100만 토큰과 내장 도구를 제공한다. 공개 가중치에는 Qwen Community License 1.0이 적용된다. [모델 카드](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) · [공식 라이선스](https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/LICENSE)
 
+## Basalt는 어떤 추론 엔진인가
+
+Basalt는 **NVIDIA Blackwell GPU에 최적화된 로컬 LLM 추론 엔진**이다. Strata에서 갈라져 나온 MIT 라이선스 프로젝트로, Qwen3.8-Flash-Next의 가중치를 읽어 토큰을 생성하고 OpenAI·Anthropic 호환 API로 응답을 제공한다. 공식 문서의 실행 환경은 Blackwell GPU(SM 120), CUDA 13, Linux 또는 Windows x64다. [Basalt README](https://github.com/jesdga95/basalt#readme)
+
+- **MoE 전문가 가중치 배치.** 자주 선택되는 전문가 가중치는 GPU의 VRAM에 캐시하고, 나머지는 시스템 RAM에 둔다. 대화 중 어떤 전문가가 자주 선택되는지가 바뀌면 캐시를 갱신한다. RTX 5080의 16GB VRAM으로 큰 모델을 돌릴 수 있었던 배경이며, 이 구성에서는 시스템 RAM도 필요하다. [Basalt Flash-Next 가이드](https://github.com/jesdga95/basalt/blob/main/docs/models/qwen38-flash-next.md#memory)
+- **양자화 팩과 MTP.** Basalt는 가중치와 런타임에 필요한 데이터를 `.basalt` 팩으로 읽는다. MTP 드래프터가 들어 있는 Flash-Next 팩에서는 후보 토큰을 한 번에 검증하는 추측 디코딩을 사용할 수 있다. 아래 비교에서 두 엔진 모두 `IQ2_XS` 가중치와 드래프터를 사용했으므로, 193.2 tok/s와 155.6 tok/s의 차이는 이 구성에서 두 런타임을 실행한 결과다. 해당 실험은 메모리 배치와 커널 등 개별 최적화의 효과까지 측정하지는 않았다. [Basalt 팩 문서](https://github.com/jesdga95/basalt/blob/main/docs/model-file.md) · [MTP 문서](https://github.com/jesdga95/basalt/blob/main/docs/models/qwen38-flash-next.md#drafting) · [원본 벤치마크](https://www.reddit.com/r/LocalLLM/comments/1y0pydt/basalt_05_vs_strata_0155_qwen_38_fn_on_single/)
+
 ## RTX 5080에서 193.2 tok/s가 나온 조건
 
 같은 PC에서 Basalt 0.5.0과 Strata 0.1.55에 동일한 코딩 프롬프트를 넣은 비교다. Ryzen 9900X, RTX 5080 16GB, 시스템 RAM 64GB에서 `IQ2_XS` 가중치와 MTP 드래프터, int8 KV 캐시를 사용했다. 아래는 프롬프트 캐시를 재사용하지 않고 **입력 65,536토큰과 출력 1,024토큰**으로 실행한 3회 중앙값이다. 런타임에 설정한 컨텍스트 창은 131,072토큰이었다. [원본 측정표](https://www.reddit.com/r/LocalLLM/comments/1y0pydt/basalt_05_vs_strata_0155_qwen_38_fn_on_single/)
