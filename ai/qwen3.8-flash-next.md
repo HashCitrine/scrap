@@ -16,6 +16,13 @@ Basalt는 **NVIDIA Blackwell GPU에 최적화된 로컬 LLM 추론 엔진**이�
 - **MoE 전문가 가중치 배치.** 자주 선택되는 전문가 가중치는 GPU의 VRAM에 캐시하고, 나머지는 시스템 RAM에 둔다. 대화 중 어떤 전문가가 자주 선택되는지가 바뀌면 캐시를 갱신한다. RTX 5080의 16GB VRAM으로 큰 모델을 돌릴 수 있었던 배경이며, 이 구성에서는 시스템 RAM도 필요하다. [Basalt Flash-Next 가이드](https://github.com/jesdga95/basalt/blob/main/docs/models/qwen38-flash-next.md#memory)
 - **양자화 팩과 MTP.** Basalt는 가중치와 런타임에 필요한 데이터를 `.basalt` 팩으로 읽는다. MTP 드래프터가 들어 있는 Flash-Next 팩에서는 후보 토큰을 한 번에 검증하는 추측 디코딩을 사용할 수 있다. 아래 비교에서 두 엔진 모두 `IQ2_XS` 가중치와 드래프터를 사용했으므로, 193.2 tok/s와 155.6 tok/s의 차이는 이 구성에서 두 런타임을 실행한 결과다. 해당 실험은 메모리 배치와 커널 등 개별 최적화의 효과까지 측정하지는 않았다. [Basalt 팩 문서](https://github.com/jesdga95/basalt/blob/main/docs/model-file.md) · [MTP 문서](https://github.com/jesdga95/basalt/blob/main/docs/models/qwen38-flash-next.md#drafting) · [원본 벤치마크](https://www.reddit.com/r/LocalLLM/comments/1y0pydt/basalt_05_vs_strata_0155_qwen_38_fn_on_single/)
 
+## Strata는 어떤 추론 엔진인가
+
+Strata는 **GPU와 시스템 RAM을 함께 써서 Qwen3.8-Flash-Next 같은 대형 MoE 모델을 소비자용 PC에서 실행하는 로컬 추론 엔진**이다. Basalt가 파생된 프로젝트이며, 로컬에서 OpenAI·Anthropic 호환 API로 모델을 제공한다. 공식 하드웨어 목록에는 NVIDIA RTX 20·30·40·50 시리즈와 일부 AMD Radeon GPU가 포함된다. [Strata README](https://github.com/Niko1221/Strata#readme) · [Basalt 프로젝트 크레딧](https://github.com/jesdga95/basalt#credits)
+
+- **VRAM에 없는 전문가 처리.** 자주 선택되는 전문가 가중치는 VRAM에 캐시하고, 나머지는 시스템 RAM에 둔다. 캐시에 없는 전문가가 선택되면 CPU에서 계산하거나 PCIe를 통해 가중치를 GPU로 옮겨 계산한다. VRAM 크기뿐 아니라 시스템 RAM 용량과 대역폭, CPU 성능, PCIe 대역폭도 처리 속도에 영향을 준다. [Strata 엔진 설정](https://github.com/Niko1221/Strata/blob/main/docs/DETAILS.md)
+- **영상에서의 실행 사례.** RTX 3060 12GB와 시스템 RAM 64GB에서는 `Q2_0` 가중치와 4,096토큰 입력으로 42.9 tok/s를 기록했다. 아래 RTX 5080 비교에서는 Strata 0.1.55가 `IQ2_XS`와 MTP를 사용했다. GPU뿐 아니라 가중치와 입력 길이도 달라 두 사례의 속도 차이를 GPU 성능만으로 설명하기 어렵다. [영상 8:44](https://youtu.be/LkLgzSLD844?t=524) · [제작자 출처 목록](https://locallyexplains.site/qwen-3-8-flash-next-fastest-way-to-run/) · [RTX 5080 원본 벤치마크](https://www.reddit.com/r/LocalLLM/comments/1y0pydt/basalt_05_vs_strata_0155_qwen_38_fn_on_single/)
+
 ## RTX 5080에서 193.2 tok/s가 나온 조건
 
 같은 PC에서 Basalt 0.5.0과 Strata 0.1.55에 동일한 코딩 프롬프트를 넣은 비교다. Ryzen 9900X, RTX 5080 16GB, 시스템 RAM 64GB에서 `IQ2_XS` 가중치와 MTP 드래프터, int8 KV 캐시를 사용했다. 아래는 프롬프트 캐시를 재사용하지 않고 **입력 65,536토큰과 출력 1,024토큰**으로 실행한 3회 중앙값이다. 런타임에 설정한 컨텍스트 창은 131,072토큰이었다. [원본 측정표](https://www.reddit.com/r/LocalLLM/comments/1y0pydt/basalt_05_vs_strata_0155_qwen_38_fn_on_single/)
