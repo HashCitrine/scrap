@@ -39,3 +39,7 @@
 - IBM: [What is RAG (Retrieval Augmented Generation)](https://www.ibm.com/think/topics/retrieval-augmented-generation)
 - Weaviate Blog: [Introduction to Retrieval Augmented Generation (RAG)](https://weaviate.io/blog/introduction-to-rag)
 - [DeepLearning.AI RAG Course](https://www.deeplearning.ai/courses/retrieval-augmented-generation-rag)
+
+## 관련 학습 노트
+
+- [외부 지식을 LLM에 연결하는 두 방식 — MeMo와 OmniEVIE-4B](./memo-and-omnievie.md)
